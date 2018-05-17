@@ -1,0 +1,173 @@
+《第一单元》
+可以通过唯一标示userId获取用户的什么: Token
+
+connect() 方法在整个应用只需要调用一次，且必须在（）调用: 主进程
+
+我们通过什么方法像融云传递信息: RongIM.setUserInfoProvider
+
+如果项目在离线状态，要想获得推送信息应该调用的是: disconnect（）
+
+下面具备即时通讯功能的SDK有: 融云SDK
+
+Fresco设置加载失败占位图的配置属性是: failureImage
+
+Fresco设置叠加图的配置属性是: overlayImage
+
+Fresco显示图片为圆形图片的属性是: roundAsCircle
+
+以下有关Fresco说法正确的是: 渐进式图片加载
+
+以下属于即时通信的软件是
+A: 陌陌
+B: QQ
+C: 微信
+
+关于在服务端请求 Token以下错误的是
+B: 客户端不能做这个操作
+C: 客户端用不到这个token
+
+
+Fresco支持的缩放类型有
+A: fitStart
+B: nono
+C: centerInside
+D: focusCrop
+
+
+下列属于Fresco功能的是
+A: 动画图
+B: 渐进式JPEG图
+C: 图片修改
+D: 缩放
+
+
+
+《第二单元》
+
+
+泛型类中的泛型不能作为的类型有: 作用域类型
+
+仅取出可观察到的最后一个值的操作符是: last
+
+
+Java8中，只有一个函数的接口被称之为:函数式接口： 对 
+
+Observer对象是被观察者，Observable对象是观察者： 错 
+
+Rxjava的异步实现，是通过一种扩展的单利模式来实现： 错 
+
+响应式_编程是一种基于异步数据流概念的编程模式： 对 
+
+
+
+
+《第三单元》
+
+
+ButterKnife 可以绑定在资源文件上定义好的资源，以下哪个不是: BindThings
+
+
+关于Intent 对象说法正确的是（）
+A: 在 android 中，Intent对象是用来传递信息的
+B: Intent 对象可以把值传递给广播或 Activity
+C: 利用 Intent 传值时，可以传递一部分值类型
+
+
+
+
+《第一周考》
+
+
+
+
+《第六单元》
+
+在Java8中，只有一个函数的接口被称之为：（）: 函数式接口
+
+在观察者模式中，创建被观察类，继承（）类。: Observable
+
+在rxjava中过滤的数据操作符是：( )。: filter
+
+我们经常使用的RxJava属于( )编程。: 响应式
+
+RxJava的事件回调方法onCompleted()代表：（  ）: 事件队列完结
+
+
+对 Observer 接口进行了一些扩展的类是：（）: Subscriber
+
+在Rxjava中，去重操作符是：（） 练习手册4单元，知识点：RxJava: distinct
+
+
+可以实现异步操作的是： 练习手册4单元，知识点：RxJava
+B: RxJava
+C: AsyncTask
+D: Handler
+
+RxJava的事件回调方法中存在互斥关系的是:( ) 练习手册4单元，知识点：RxJava
+A: onCompleted()
+B: onError()
+
+
+RxJava中map是用来转换对象的。 练习手册4单元，知识点：RxJava： 对 
+
+RxJava中map是用来平铺对象的。 练习手册4单元，知识点：RxJava： 错 
+
+
+
+
+《第七单元》
+
+
+Retrofit是那个公司出品的？: Square
+
+
+RxJava中有四个基本概念,（）是被观察者:
+Observable
+
+
+RxJava如何来指定Observable和Observer运行的线程
+A: subscribeOn
+B: observeOn
+
+GreenDao实质是连接_数据库与类的桥梁： 错 
+
+
+
+
+
+《第八单元》
+
+使用MVP是提取出了获取数据和（）的逻辑：处理数据
+
+
+RxJava中用于指定发射事件所在线程的方法是（）：subscribeOn
+
+
+下列属于RxJava元操作符的是:（）:lift
+
+
+属于Retrofit同步方法的是（）：execute()
+
+
+组成Lambda表达的三部分是（）
+
+A：参数列表
+B：箭头符号
+D：函数体
+
+
+用于Http Get请求传递参数的注解有（）
+
+B:query
+C:QueryMap
+
+
+
+
+
+《》
+
+
+
+《》
+《》
