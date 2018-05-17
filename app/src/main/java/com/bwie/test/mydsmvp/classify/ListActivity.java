@@ -22,6 +22,7 @@ public class ListActivity extends BaseActivity<ListPresenter> implements ListCon
     private int pscid;
     private boolean isRefresh = true;
     private XrvListAdapter adapter;
+    public static final int LISTACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class ListActivity extends BaseActivity<ListPresenter> implements ListCon
         initView();
         mPresenter.getProducts(pscid + "");
     }
+
     private void initView() {
         mXrv = (XRecyclerView) findViewById(R.id.xrv);
         //设置布局管理器
@@ -54,8 +56,8 @@ public class ListActivity extends BaseActivity<ListPresenter> implements ListCon
                 mPresenter.getProducts(pscid + "");
             }
         });
-
     }
+
     @Override
     public int getContentLayout() {
         return R.layout.activity_list;
@@ -94,6 +96,7 @@ public class ListActivity extends BaseActivity<ListPresenter> implements ListCon
             public void OnItemClick(ProductsBean.DataBean dataBean) {
                 Intent intent = new Intent(ListActivity.this, ListDetailsActivity.class);
                 intent.putExtra("bean", dataBean);
+                intent.putExtra("flag", LISTACTIVITY);
                 startActivity(intent);
             }
         });

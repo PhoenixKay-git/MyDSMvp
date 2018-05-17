@@ -1,20 +1,26 @@
 package com.bwie.test.mydsmvp.shopcart;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.bwie.test.bean.GetCartsBean;
 import com.bwie.test.bean.SellerBean;
+import com.bwie.test.bean.eventbus.MessageEvent;
 import com.bwie.test.component.DaggerHttpComponent;
+import com.bwie.test.mydsmvp.R;
 import com.bwie.test.mydsmvp.base.BaseActivity;
+import com.bwie.test.mydsmvp.shopcart.adapter.ElvShopcartAdapter;
 import com.bwie.test.mydsmvp.shopcart.contract.ShopcartContract;
 import com.bwie.test.mydsmvp.shopcart.presenter.ShopcartPresenter;
-import com.bwie.test.mydsmvp.R;
 import com.bwie.test.utils.DialogUtil;
 import com.bwie.test.utils.SharedPreferencesUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -33,6 +39,8 @@ public class ShopCartActivity extends BaseActivity<ShopcartPresenter> implements
      */
     private TextView mTvTotal;
     private ProgressDialog progressDialog;
+    private ElvShopcartAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +69,66 @@ public class ShopCartActivity extends BaseActivity<ShopcartPresenter> implements
         mCbAll = (CheckBox) findViewById(R.id.cbAll);
         mTvMoney = (TextView) findViewById(R.id.tvMoney);
         mTvTotal = (TextView) findViewById(R.id.tvTotal);
+
+        mCbAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (adapter != null) {
+                    progressDialog.show();
+                    adapter.changeAllState(mCbAll.isChecked());
+                }
+            }
+        });
+
+        mTvTotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(ShopCartActivity.this, MakeSureOrderActivity.class);
+//                startActivity(intent);
+                //把用户选中的商品传过去
+                List<SellerBean> gList = adapter.getGroupList();
+                List<List<GetCartsBean.DataBean.ListBean>> cList = adapter.getchildList();
+                MessageEvent messageEvent = new MessageEvent();
+                messageEvent.setcList(cList);
+                messageEvent.setgList(gList);
+                EventBus.getDefault().postSticky(messageEvent);
+            }
+        });
     }
 
     @Override
     public void showCartList(List<SellerBean> groupList, List<List<GetCartsBean.DataBean.ListBean>> childList) {
         //判断所有商家是否全部选中
         mCbAll.setChecked(isSellerAddSelected(groupList));
+
+        //创建适配器
+        adapter = new ElvShopcartAdapter(this, groupList, childList, mPresenter, progressDialog);
+        mElv.setAdapter(adapter);
+        //获取数量和总价
+        String[] strings = adapter.computeMoneyAndNum();
+        mTvMoney.setText("总计：" + strings[0] + "元");
+        mTvTotal.setText("去结算("+strings[1]+"个)");
+        //        //默认展开列表
+        for (int i = 0; i < groupList.size(); i++) {
+            mElv.expandGroup(i);
+        }
+        //关闭进度条
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void updateCartsSuccess(String msg) {
+        if (adapter!=null){
+            adapter.updataSuccess();
+        }
+    }
+
+    @Override
+    public void deleteCartSuccess(String msg) {
+        //调用适配器里的delSuccess()方法
+        if (adapter!=null){
+            adapter.delSuccess();
+        }
     }
 
     /**

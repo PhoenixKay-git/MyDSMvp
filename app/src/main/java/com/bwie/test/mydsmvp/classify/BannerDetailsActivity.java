@@ -35,7 +35,6 @@ public class BannerDetailsActivity extends AppCompatActivity {
         list = Arrays.asList(split);
         count = list.size();
         initView();
-
     }
 
     private void initView() {

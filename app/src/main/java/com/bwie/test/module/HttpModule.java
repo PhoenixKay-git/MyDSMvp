@@ -7,6 +7,10 @@ import com.bwie.test.net.AddCartApiService;
 import com.bwie.test.net.Api;
 import com.bwie.test.net.CatagoryApi;
 import com.bwie.test.net.CatagoryApiService;
+import com.bwie.test.net.CreateOrderApi;
+import com.bwie.test.net.CreateOrderApiService;
+import com.bwie.test.net.DeleteCartApi;
+import com.bwie.test.net.DeleteCartApiService;
 import com.bwie.test.net.GetCartApi;
 import com.bwie.test.net.GetCartApiService;
 import com.bwie.test.net.ListApi;
@@ -15,6 +19,8 @@ import com.bwie.test.net.LoginApi;
 import com.bwie.test.net.LoginApiService;
 import com.bwie.test.net.ProductCatagoryApi;
 import com.bwie.test.net.ProductCatagoryApiService;
+import com.bwie.test.net.UpdateCartApi;
+import com.bwie.test.net.UpdateCartApiService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -117,5 +123,41 @@ public class HttpModule {
                 .build();
         GetCartApiService getCartApiService = retrofit.create(GetCartApiService.class);
         return GetCartApi.getGetCartApi(getCartApiService);
+    }
+
+    @Provides
+    UpdateCartApi provideUpdateCartApi(OkHttpClient.Builder builder) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASEURL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(builder.build())
+                .build();
+        UpdateCartApiService updateCartApiService = retrofit.create(UpdateCartApiService.class);
+        return UpdateCartApi.getUpdateCartApi(updateCartApiService);
+    }
+
+    @Provides
+    DeleteCartApi provideDeleteCartApi(OkHttpClient.Builder builder) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASEURL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(builder.build())
+                .build();
+        DeleteCartApiService deleteCartApiService = retrofit.create(DeleteCartApiService.class);
+        return DeleteCartApi.getDeleteCartApi(deleteCartApiService);
+    }
+
+    @Provides
+    CreateOrderApi provideCreateOrderApi(OkHttpClient.Builder builder) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASEURL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(builder.build())
+                .build();
+        CreateOrderApiService createOrderApiService = retrofit.create(CreateOrderApiService.class);
+        return CreateOrderApi.getCreateOrderApi(createOrderApiService);
     }
 }

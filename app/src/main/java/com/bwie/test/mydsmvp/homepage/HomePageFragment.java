@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bwie.test.bean.AdBean;
@@ -17,12 +16,12 @@ import com.bwie.test.inter.OnItemClickListener;
 import com.bwie.test.module.HttpModule;
 import com.bwie.test.mydsmvp.WebViewActivity;
 import com.bwie.test.mydsmvp.base.BaseFragment;
+import com.bwie.test.mydsmvp.classify.ListDetailsActivity;
 import com.bwie.test.mydsmvp.homepage.adapter.RvClassAdapter;
 import com.bwie.test.mydsmvp.homepage.adapter.RvRecommendAdapter;
 import com.bwie.test.mydsmvp.homepage.adapter.RvSecKillAdapter;
 import com.bwie.test.mydsmvp.homepage.contract.HomPageContract;
 import com.bwie.test.mydsmvp.homepage.presenter.HomePagePresenter;
-import com.bwie.test.mydsmvp.search.SearchActivity;
 import com.bwie.test.utils.GlideImageLoader;
 import com.dash.zxinglibrary.activity.CaptureActivity;
 import com.dash.zxinglibrary.activity.CodeUtils;
@@ -41,7 +40,7 @@ public class HomePageFragment extends BaseFragment<HomePagePresenter> implements
     private RecyclerView rvSecKill;
     private RecyclerView rvRecommend;
     private ImageView ivZxing;
-    private LinearLayout layout_sousuo;
+    public static final int HOMEPAGE_FRAGMENT = 0;
 
     @Override
     public int getContentLayout() {
@@ -88,15 +87,6 @@ public class HomePageFragment extends BaseFragment<HomePagePresenter> implements
         banner.setImageLoader(new GlideImageLoader());
         //二维码
         ivZxing = view.findViewById(R.id.ivZxing);
-        //跳转搜索页面
-        layout_sousuo = view.findViewById(R.id.layout_sousuo);
-        layout_sousuo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
         //设置点击事件
         setListener();
         //请求数据
@@ -126,6 +116,7 @@ public class HomePageFragment extends BaseFragment<HomePagePresenter> implements
         banner.setImages(images);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+
         //给Banner设置点击事件
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
@@ -160,6 +151,23 @@ public class HomePageFragment extends BaseFragment<HomePagePresenter> implements
 
         RvRecommendAdapter rvRecommendAdapter = new RvRecommendAdapter(getActivity(), adBean.getTuijian().getList());
         rvRecommend.setAdapter(rvRecommendAdapter);
+
+        rvRecommendAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                //跳转到详情页
+                Intent intent = new Intent(getActivity(), ListDetailsActivity.class);
+                AdBean.TuijianBean.ListBean listBean = adBean.getTuijian().getList().get(position);
+                intent.putExtra("flag", HOMEPAGE_FRAGMENT);
+                intent.putExtra("bean", listBean);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(int position) {
+
+            }
+        });
     }
 
     @Override

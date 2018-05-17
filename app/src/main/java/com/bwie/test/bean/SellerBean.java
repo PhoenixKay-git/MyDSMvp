@@ -1,6 +1,8 @@
 package com.bwie.test.bean;
 
-public class SellerBean {
+import java.io.Serializable;
+
+public class SellerBean implements Serializable{
     private String sellerName;
     private String sellerid;
     private boolean selected;//商家是否选中

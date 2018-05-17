@@ -11,12 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bwie.test.bean.AdBean;
 import com.bwie.test.bean.ProductsBean;
 import com.bwie.test.component.DaggerHttpComponent;
+import com.bwie.test.mydsmvp.R;
 import com.bwie.test.mydsmvp.base.BaseActivity;
 import com.bwie.test.mydsmvp.classify.contract.AddCartContract;
 import com.bwie.test.mydsmvp.classify.presenter.AddCartPresenter;
-import com.bwie.test.mydsmvp.R;
 import com.bwie.test.mydsmvp.login.LoginActivity;
 import com.bwie.test.mydsmvp.shopcart.ShopCartActivity;
 import com.bwie.test.utils.GlideImageLoader;
@@ -41,15 +42,30 @@ public class ListDetailsActivity extends BaseActivity<AddCartPresenter> implemen
      * 加入购物车
      */
     private TextView mTvAddCard;
+    private AdBean.TuijianBean.ListBean listBean;
+    private int flag;
+    private String images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_details);
-        initView();
+
         //获取JavaBean
         Intent intent = getIntent();
-        bean = (ProductsBean.DataBean) intent.getSerializableExtra("bean");
+        flag = intent.getIntExtra("flag", -1);
+        if (flag == -1) {
+            return;
+        }
+        if (flag == ListActivity.LISTACTIVITY) {
+            bean = (ProductsBean.DataBean) intent.getSerializableExtra("bean");
+            images = bean.getImages();
+        } else {
+            listBean = (AdBean.TuijianBean.ListBean) intent.getSerializableExtra("bean");
+            images = listBean.getImages();
+        }
+
+        initView();
         //设置值
         setData();
     }
@@ -83,20 +99,14 @@ public class ListDetailsActivity extends BaseActivity<AddCartPresenter> implemen
      * 设置值
      */
     private void setData() {
-        if (bean == null) {
-            return;
+        int money = 0;
+        if (flag == ListActivity.LISTACTIVITY) {
+            money = bean.getSalenum();
+        } else {
+            money = listBean.getSalenum();
         }
-        //设置图片加载器
-        mBanner.setImageLoader(new GlideImageLoader());
-        String[] imgs = bean.getImages().split("\\|");
-        //设置图片集合
-        mBanner.setImages(Arrays.asList(imgs));
-        //banner设置方法全部调用完毕时最后调用
-        mBanner.start();
-
-        mTvTitle.setText(bean.getTitle());
         //给原价加横线
-        SpannableString spannableString = new SpannableString("原价:" + bean.getSalenum());
+        SpannableString spannableString = new SpannableString("原价:" + money);
         StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
         spannableString.setSpan(strikethroughSpan, 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         mTvPrice.setText(spannableString);
@@ -105,14 +115,30 @@ public class ListDetailsActivity extends BaseActivity<AddCartPresenter> implemen
             @Override
             public void OnBannerClick(int position) {
                 Intent intent = new Intent(ListDetailsActivity.this, BannerDetailsActivity.class);
-                intent.putExtra("bean", bean);
+                intent.putExtra("imgs", images);
                 intent.putExtra("position", position);
                 startActivity(intent);
             }
         });
 
+        //设置图片加载器
+        mBanner.setImageLoader(new GlideImageLoader());
+        String[] imgs = null;
 
-        mTvVipPrice.setText("现价：" + bean.getPrice());
+        if (flag == ListActivity.LISTACTIVITY) {
+            imgs = bean.getImages().split("\\|");
+            mTvTitle.setText(bean.getTitle());
+            mTvVipPrice.setText("现价：" + bean.getPrice());
+        } else {
+            imgs = listBean.getImages().split("\\|");
+            mTvTitle.setText(listBean.getTitle());
+            mTvVipPrice.setText("现价：" + listBean.getPrice());
+
+        }
+        //设置图片集合
+        mBanner.setImages(Arrays.asList(imgs));
+        //banner设置方法全部调用完毕时最后调用
+        mBanner.start();
     }
 
     @Override
@@ -129,7 +155,12 @@ public class ListDetailsActivity extends BaseActivity<AddCartPresenter> implemen
                 } else {
                     //登录过了
                     String uid = (String) SharedPreferencesUtils.getParam(ListDetailsActivity.this, "uid", "");
-                    int pid = bean.getPid();
+                    int pid = 0;
+                    if (flag == ListActivity.LISTACTIVITY) {
+                        pid = bean.getPid();
+                    } else {
+                        pid = listBean.getPid();
+                    }
                     mPresenter.addCart(uid, pid + "", token);
                 }
                 break;
