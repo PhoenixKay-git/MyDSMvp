@@ -69,9 +69,7 @@ public class XrvListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return list.size();
     }
 
-
     class XlvViewHolder extends RecyclerView.ViewHolder {
-
         private final LinearLayout ll;
         private final SimpleDraweeView iv;
         private final TextView tvTitle;
@@ -88,7 +86,6 @@ public class XrvListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     /**
      * 刷新
-     *
      * @param templist
      */
     public void refresh(List<ProductsBean.DataBean> templist) {
@@ -99,12 +96,10 @@ public class XrvListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     /**
      * 加载更多
-     *
      * @param list
      */
     public void loadMore(List<ProductsBean.DataBean> list) {
         this.list.addAll(list);
         notifyDataSetChanged();
     }
-
 }

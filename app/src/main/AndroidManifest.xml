@@ -74,7 +74,9 @@
         <activity android:name=".login.LoginActivity"/>
         <activity android:name=".classify.ListDetailsActivity"/>
         <activity android:name=".WebViewActivity" />
-        <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".classify.ListActivity"/>
+        <activity android:name=".classify.BannerDetailsActivity"/>
+        <activity android:name=".search.SearchActivity"/>
         <activity android:name=".shopcart.ShopCartActivity"/>
     </application>
 

@@ -79,7 +79,6 @@ public class RvLeftAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     /**
      * 选中后，改变字体颜色和背景色
-     *
      * @param position
      * @param bool
      */

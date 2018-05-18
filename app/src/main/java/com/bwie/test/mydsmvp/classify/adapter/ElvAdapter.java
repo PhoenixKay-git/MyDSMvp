@@ -37,7 +37,8 @@ public class ElvAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 1;//因为二级列表是一个RecylerView，所以返回1即可
+        //因为二级列表是一个RecylerView，所以返回1即可
+        return 1;
     }
 
     @Override
@@ -82,8 +83,7 @@ public class ElvAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup
-            parent) {
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         ChildViewHolder childViewHolder;
         if (convertView == null) {
             childViewHolder = new ChildViewHolder();

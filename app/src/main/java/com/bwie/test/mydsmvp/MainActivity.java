@@ -27,6 +27,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //隐藏原有标题
+        getSupportActionBar().hide();
         initView();
         fragmentManager = getSupportFragmentManager();
         homePageFragment = new HomePageFragment();
