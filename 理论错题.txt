@@ -77,6 +77,65 @@ C: 利用 Intent 传值时，可以传递一部分值类型
 
 《第一周考》
 
+以下属于Fresco设置加载失败占位图的xml配置属性值的是: retryImage
+
+
+以下属于Fresco设置点击重新加载图的xml配置属性值的是: retryImage
+
+
+Fresco显示图片为圆形图片的属性是什么: roundAsCircle
+
+
+Retrofit网络请求框架内部封装了:(来自于练习手册第5单元知识点：Retrofit)
+: OkHttp
+
+
+以下关于EventBus说法错误的是：(来自于练习手册第3单元知识点：EventBus)
+: EventBus可以用于进程间通信。
+
+
+Retrofit中,异步网络请求回调方法运行在什么线程中：(来自于练习手册第5单元知识点：Retrofit)
+C: 主线程
+
+
+以下属于Retrofit异步请求方法的是:(来自于练习手册第6单元知识点：Retrofit)
+: enqueue()
+
+
+GreenDao3.0采用什么方式来定义实体类：(来自于练习手册第4单元知识点：GreenDao)
+: 注解
+
+
+EventBus有以下几种ThreadMode（线程模型）：（来自于练习手册第3单元知识点：EventBus）
+A: POSTING
+B: MAIN
+C: BACKGROUND
+D: ASYNC
+
+
+ArrayList,LinkedList的区别下列说法正确的是
+A: ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。
+C: 对于随机访问get和set，ArrayList优于LinkedList，因为LinkedList要移动指针。
+D: 对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。
+
+
+以下关于WebP的支持正确的是：（来自于练习手册第1单元知识点：Fresco）
+B: Android4.0开始支持
+C: 4.2.1+开始支持带透明度与无损的
+
+
+以下属于Fresco三级缓存是：（来自于练习手册第1单元知识点：Fresco）
+A: bitmap缓存
+B: 未解码图片缓存
+D: 文件缓存
+
+
+Fresco含有3级缓存设计（1级内存，2级磁盘）： 错 
+
+
+Retrofit底层默认使用HttpUrlConnection处理网络请求： 错 
+
+
 
 
 
