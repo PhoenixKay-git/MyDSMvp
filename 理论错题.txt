@@ -223,7 +223,6 @@ C:QueryMap
 
 
 
-
 《第九单元》
 
 以下不属于Thread类提供的线程控制方法的是 : break()
@@ -250,6 +249,67 @@ D: 删除或替换兼容包中一些无用的图片
 
 
 
+《第二周考》
+
+
+下列不属于Rxjava1.0,2.0区别的是（）：2.0不是观察者模式
+
+
+下面使用Retrofit发起Get请求的是:@GET
+
+
+Retrofit中POST请求体方式向服务器传入json字符串注解是下面哪一个：@body
+
+
+Retrofit通过__哪个方法来释放Retrofit的资源：cancel()
+
+
+支付宝支付不必须的是___,:商户地址
+
+
+GreenDao支持加密__保护敏感数据安全：数据库
+
+
+下面属于Retrofit的注解的有哪些：
+
+@POST
+@PUT
+@DELETE
+
+
+GreenDao会自动生成的三个类有?
+
+@DaoMaster
+@DaoSession
+@NoteDao
+
+String和StringBuffer、StringBuilder的区别:()
+
+：String的内容是不可变的
+：StringBuffer、StringBuilder内容是可变的
+
+
+以下关于接口和抽象类说话正确的是：
+
+：抽象类要被子类继承，接口要被类实现。
+：如果一个类里有抽象方法，那么这个类只能是抽象类
+：接口只能做方法申明，抽象类中可以做方法申明，也可以做方法实现
+
+
+Retrofit是基于httpurlconnection封装的  ：错
+
+
+RxJava只有构建者模式一种模式 ：错
+
+
+微信支付提交支付接口数据格式是json串 ：错
+
+
+RxJava封装了非常多功能强大的操作符 ：错
+
+
+RXAndroid中用到了观察者模式 ：对
+
 
 
 
@@ -263,4 +323,30 @@ D: 删除或替换兼容包中一些无用的图片
 
 
 《》
-《》
+
+
+
+
+
+
+
+
+
+
+《》《》
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+《》《》
